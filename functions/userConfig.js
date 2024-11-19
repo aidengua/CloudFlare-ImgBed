@@ -17,7 +17,7 @@ export async function onRequestGet(context) {
             return new Response(JSON.stringify({}), { status: 200 });
         }
     } catch (error) {
-        // 捕捉解析错误并返回空对象
+        // 捕捉解析錯誤并返回空对象
         return new Response(JSON.stringify({}), { status: 200 });
     }
 }

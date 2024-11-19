@@ -15,6 +15,6 @@ export async function onRequestPost(context) {
     if (env.AUTH_CODE !== undefined && authCode !== env.AUTH_CODE) {
       return new Response('Unauthorized', { status: 401 })
     }
-    //返回登陸成功
+    //返回登錄成功
     return new Response('Login success', { status: 200 })
 }
