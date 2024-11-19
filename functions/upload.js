@@ -101,7 +101,7 @@ export async function onRequestPost(context) {  // Contents of context object
     const fileName = formdata.get('file').name;
     let fileExt = fileName.split('.').pop(); // 文件扩展名
     if (!isExtValid(fileExt)) {
-        // 如果文件名中没有扩展名，尝试从文件类型中获取
+        // 如果文件名中没有扩展名，尝试从文件類型中获取
         fileExt = fileType.split('/').pop();
         if (!isExtValid(fileExt)) {
             // Type中无法获取扩展名
@@ -111,7 +111,7 @@ export async function onRequestPost(context) {  // Contents of context object
 
     // CloudFlare R2 渠道
     if (uploadChannel === 'CloudflareR2') {
-        // 检查R2数据库是否配置
+        // 檢查R2数据库是否配置
         if (typeof env.img_r2 == "undefined" || env.img_r2 == null || env.img_r2 == "") {
             return new Response('Error: Please configure R2 database', { status: 500 });
         }
@@ -126,7 +126,7 @@ export async function onRequestPost(context) {  // Contents of context object
         // 写入R2数据库
         await R2DataBase.put(fullId, formdata.get('file'));
 
-        // 图像审查
+        // 图像審查
         const apikey = env.ModerateContentApiKey;
         if (apikey == undefined || apikey == null || apikey == "") {
             await env.img_url.put(fullId, "", {
@@ -134,7 +134,7 @@ export async function onRequestPost(context) {  // Contents of context object
             });
         } else {
             try {
-                // 检查R2公网链接是否配置
+                // 檢查R2公网链接是否配置
                 if (typeof env.R2PublicUrl == "undefined" || env.R2PublicUrl == null || env.R2PublicUrl == "") {
                     return new Response('Error: Please configure R2 public url', { status: 500 });
                 }
@@ -149,7 +149,7 @@ export async function onRequestPost(context) {  // Contents of context object
                 });
             } catch (error) {
                 console.error('Moderate Error:', error);
-                // 将不带审查的图片写入数据库
+                // 将不带審查的图片写入数据库
                 await env.img_url.put(fullId, "", {
                     metadata: { FileName: fileName, FileType: fileType, ListType: "None", Label: "None", TimeStamp: time, Channel: "CloudflareR2", UploadIP: uploadIp },
                 });
@@ -266,7 +266,7 @@ export async function onRequestPost(context) {  // Contents of context object
                     });
                 } catch (error) {
                     console.error('Moderate Error:', error);
-                    // 将不带审查的图片写入数据库
+                    // 将不带審查的图片写入数据库
                     await env.img_url.put(fullId, "", {
                         metadata: { FileName: fileName, FileType: fileType, ListType: "None", Label: "None", TimeStamp: time, Channel: "TelegramNew", TgFileId: id, UploadIP: uploadIp },
                     });

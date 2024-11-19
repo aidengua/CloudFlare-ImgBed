@@ -36,7 +36,7 @@ export async function onRequest(context) {  // Contents of context object
             return Response.redirect(new URL("/blockimg", request.url).href, 302); // Ensure URL is correctly formed
         }
     }
-    // 检查是否配置了 KV 数据库
+    // 檢查是否配置了 KV 数据库
     if (typeof env.img_url == "undefined" || env.img_url == null || env.img_url == "") {
         return new Response('Error: Please configure KV database', { status: 500 });
     }
@@ -47,7 +47,7 @@ export async function onRequest(context) {  // Contents of context object
     const encodedFileName = encodeURIComponent(fileName);
     const fileType = imgRecord.metadata?.FileType || null;
     
-    // 检查文件可訪問狀態
+    // 檢查文件可訪問狀態
     let accessRes = await returnWithCheck(request, env, url, imgRecord);
     if (accessRes.status !== 200) {
         return accessRes; // 如果不可訪問，直接返回
@@ -55,7 +55,7 @@ export async function onRequest(context) {  // Contents of context object
 
     // Cloudflare R2渠道
     if (imgRecord.metadata?.Channel === 'CloudflareR2') {
-        // 检查是否配置了R2
+        // 檢查是否配置了R2
         if (typeof env.img_r2 == "undefined" || env.img_r2 == null || env.img_r2 == "") {
             return new Response('Error: Please configure R2 database', { status: 500 });
         }
