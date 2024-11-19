@@ -41,7 +41,7 @@ export async function onRequest(context) {  // Contents of context object
         return new Response('Error: Please configure KV database', { status: 500 });
     }
     const imgRecord = await env.img_url.getWithMetadata(params.id);
-    // 如果meatdata不存在，只可能是之前未设置KV，且存储在Telegraph上的图片，那么在后面获取时会返回404錯誤，此处不用处理
+    // 如果meatdata不存在，只可能是之前未設置KV，且存储在Telegraph上的圖片，那么在后面获取时会返回404錯誤，此处不用处理
     
     const fileName = imgRecord.metadata?.FileName || params.id;
     const encodedFileName = encodeURIComponent(fileName);
@@ -99,7 +99,7 @@ export async function onRequest(context) {  // Contents of context object
 
     // 构建目标 URL
     if (isTgChannel(imgRecord)) {
-        // 获取TG图片真实地址
+        // 获取TG圖片真实地址
         const filePath = await getFilePath(env, TgFileID);
         if (filePath === null) {
             return new Response('Error: Failed to fetch image path', { status: 500 });

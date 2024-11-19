@@ -8,7 +8,7 @@ export async function onRequestPost(context) {
       next, // used for middleware or to fetch assets
       data, // arbitrary space for passing data between middlewares
     } = context;
-    //从POST请求中获取authCode
+    //从POST請求中获取authCode
     const jsonRequest = await request.json();
     const authCode = jsonRequest.authCode;
     //验证authCode

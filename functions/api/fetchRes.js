@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-    // 获取请求体中URL的内容，判断是否为图片或视频，如果是则返回，否则返回錯誤信息
+    // 获取請求体中URL的内容，判断是否为圖片或视频，如果是則返回，否則返回錯誤信息
     const {
         request,
         env,
@@ -8,7 +8,7 @@ export async function onRequest(context) {
         next,
         data
     } = context;
-    //如果是OPTIONS请求，返回允许的方法
+    //如果是OPTIONS請求，返回允许的方法
     if (request.method === 'OPTIONS') {
         return new Response(null, {
             headers: {

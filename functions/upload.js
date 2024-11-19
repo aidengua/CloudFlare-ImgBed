@@ -29,7 +29,7 @@ function getCookieValue(cookies, name) {
 }
 
 function authCheck(env, url, request) {
-    // 优先从请求 URL 获取 authCode
+    // 优先从請求 URL 获取 authCode
     let authCode = url.searchParams.get('authCode');
     // 如果 URL 中没有 authCode，从 Referer 中获取
     if (!authCode) {
@@ -43,11 +43,11 @@ function authCheck(env, url, request) {
             }
         }
     }
-    // 如果 Referer 中没有 authCode，从请求头中获取
+    // 如果 Referer 中没有 authCode，从請求头中获取
     if (!authCode) {
         authCode = request.headers.get('authCode');
     }
-    // 如果请求头中没有 authCode，从 Cookie 中获取
+    // 如果請求头中没有 authCode，从 Cookie 中获取
     if (!authCode) {
         const cookies = request.headers.get('Cookie');
         if (cookies) {
@@ -126,7 +126,7 @@ export async function onRequestPost(context) {  // Contents of context object
         // 写入R2数据库
         await R2DataBase.put(fullId, formdata.get('file'));
 
-        // 图像審查
+        // 圖像審查
         const apikey = env.ModerateContentApiKey;
         if (apikey == undefined || apikey == null || apikey == "") {
             await env.img_url.put(fullId, "", {
@@ -134,7 +134,7 @@ export async function onRequestPost(context) {  // Contents of context object
             });
         } else {
             try {
-                // 檢查R2公网链接是否配置
+                // 檢查R2公网連接是否配置
                 if (typeof env.R2PublicUrl == "undefined" || env.R2PublicUrl == null || env.R2PublicUrl == "") {
                     return new Response('Error: Please configure R2 public url', { status: 500 });
                 }
@@ -149,7 +149,7 @@ export async function onRequestPost(context) {  // Contents of context object
                 });
             } catch (error) {
                 console.error('Moderate Error:', error);
-                // 将不带審查的图片写入数据库
+                // 将不带審查的圖片写入数据库
                 await env.img_url.put(fullId, "", {
                     metadata: { FileName: fileName, FileType: fileType, ListType: "None", Label: "None", TimeStamp: time, Channel: "CloudflareR2", UploadIP: uploadIp },
                 });
@@ -197,7 +197,7 @@ export async function onRequestPost(context) {  // Contents of context object
             sendFunction = {'url': 'sendAnimation', 'type': 'animation'};
         }
 
-        // 从参数中获取serverCompress，如果为false，则使用sendDocument接口
+        // 从参数中获取serverCompress，如果为false，則使用sendDocument接口
         if (url.searchParams.get('serverCompress') === 'false') {
             sendFunction = {'url': 'sendDocument', 'type': 'document'};
         }
@@ -215,7 +215,7 @@ export async function onRequestPost(context) {  // Contents of context object
                 targetUrl.searchParams.append(key, value);
             }
         });
-        // 复制请求头并剔除 authCode
+        // 复制請求头并剔除 authCode
         const headers = new Headers(clonedRequest.headers);
         headers.delete('authCode');
 
@@ -266,7 +266,7 @@ export async function onRequestPost(context) {  // Contents of context object
                     });
                 } catch (error) {
                     console.error('Moderate Error:', error);
-                    // 将不带審查的图片写入数据库
+                    // 将不带審查的圖片写入数据库
                     await env.img_url.put(fullId, "", {
                         metadata: { FileName: fileName, FileType: fileType, ListType: "None", Label: "None", TimeStamp: time, Channel: "TelegramNew", TgFileId: id, UploadIP: uploadIp },
                     });
