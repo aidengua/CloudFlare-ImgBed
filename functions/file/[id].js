@@ -47,10 +47,10 @@ export async function onRequest(context) {  // Contents of context object
     const encodedFileName = encodeURIComponent(fileName);
     const fileType = imgRecord.metadata?.FileType || null;
     
-    // 检查文件可访问状态
+    // 检查文件可訪問狀態
     let accessRes = await returnWithCheck(request, env, url, imgRecord);
     if (accessRes.status !== 200) {
-        return accessRes; // 如果不可访问，直接返回
+        return accessRes; // 如果不可訪問，直接返回
     }
 
     // Cloudflare R2渠道

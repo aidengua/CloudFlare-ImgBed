@@ -43,13 +43,13 @@ jobs:
         draft: false
         prerelease: false
 
-    # 上传压缩文件到 Release
+    # 上傳压缩文件到 Release
     - name: Upload Release Assets
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: release-v1.0.${{ github.run_number }}.zip  # 上传压缩文件
-        asset_name: release-v1.0.${{ github.run_number }}.zip  # 上传文件的名称
+        asset_path: release-v1.0.${{ github.run_number }}.zip  # 上傳压缩文件
+        asset_name: release-v1.0.${{ github.run_number }}.zip  # 上傳文件的名称
         asset_content_type: application/zip

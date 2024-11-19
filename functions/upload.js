@@ -71,9 +71,9 @@ export async function onRequestPost(context) {  // Contents of context object
         return UnauthorizedException('Unauthorized');
     }
 
-    // 获得上传IP
+    // 获得上傳IP
     const uploadIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for") || request.headers.get("x-client-ip") || request.headers.get("x-host") || request.headers.get("x-originating-ip") || request.headers.get("x-cluster-client-ip") || request.headers.get("forwarded-for") || request.headers.get("forwarded") || request.headers.get("via") || request.headers.get("requester") || request.headers.get("true-client-ip") || request.headers.get("client-ip") || request.headers.get("x-remote-ip") || request.headers.get("x-originating-ip") || request.headers.get("fastly-client-ip") || request.headers.get("akamai-origin-hop") || request.headers.get("x-remote-ip") || request.headers.get("x-remote-addr") || request.headers.get("x-remote-host") || request.headers.get("x-client-ip") || request.headers.get("x-client-ips") || request.headers.get("x-client-ip")
-    // 获得上传渠道
+    // 获得上傳渠道
     const urlParamUploadChannel = url.searchParams.get('uploadChannel');
     let uploadChannel = 'TelegramNew';
     switch (urlParamUploadChannel) {
@@ -159,7 +159,7 @@ export async function onRequestPost(context) {  // Contents of context object
         }
 
 
-        // 成功上传，将文件ID返回给客户端
+        // 成功上傳，将文件ID返回给客户端
         return new Response(
             JSON.stringify([{ 'src': `/file/${fullId}` }]), 
             {
@@ -238,7 +238,7 @@ export async function onRequestPost(context) {  // Contents of context object
             // 构建独一无二的 ID
             const unique_index = time + Math.floor(Math.random() * 10000);
             const fullId = fileName? unique_index + '_' + fileName : unique_index + '.' + fileExt;
-            // 若上传成功，将响应返回给客户端
+            // 若上傳成功，将响应返回给客户端
             if (response.ok) {
                 res = new Response(
                     JSON.stringify([{ 'src': `/file/${fullId}` }]), 
